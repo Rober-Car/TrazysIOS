@@ -1,0 +1,65 @@
+name: TrazysiOS
+options:
+  bundleIdPrefix: com.roberto
+  deploymentTarget:
+    iOS: "15.0"
+packages:
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk
+    from: 13.1.1
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+targets:
+  TrazysCliente:
+    type: application
+    platform: iOS
+    sources:
+      - path: iosApp
+        excludes:
+          - Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.roberto.trazys.cliente
+        PRODUCT_NAME: TrazysCliente
+        INFOPLIST_FILE: iosApp/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        OTHER_LDFLAGS: "$(inherited) -framework ComposeApp"
+        FRAMEWORK_SEARCH_PATHS: |
+          $(inherited)
+          $(PROJECT_DIR)/../composeApp/build/bin/iosSimulatorArm64/debugFramework
+          $(PROJECT_DIR)/../composeApp/build/bin/iosArm64/debugFramework
+    dependencies:
+      - package: Firebase
+        product: FirebaseCore
+      - package: Firebase
+        product: FirebaseAuth
+      - package: Firebase
+        product: FirebaseFirestore
+      - package: Firebase
+        product: FirebaseStorage
+      - package: Firebase
+        product: FirebaseFunctions
+      - package: Firebase
+        product: FirebaseMessaging
+    preBuildScripts:
+      - name: BuildKotlinFramework
+        script: |
+          cd "$SRCROOT/.."
+          ./gradlew :composeApp:embedAndSignAppleFrameworkForXcode
+        basedOnDependencyAnalysis: false
+schemes:
+  TrazysCliente:
+    build:
+      targets:
+        TrazysCliente: all
+    run:
+      config: Debug

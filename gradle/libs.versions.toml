@@ -1,0 +1,40 @@
+[versions]
+# Base validada en GestorProKMP: Kotlin 2.4.10 + CMP 1.11.1 + Gradle 8.14.4.
+kotlin = "2.4.10"
+composeMultiplatform = "1.11.1"
+coroutines = "1.10.2"
+datastore = "1.2.1"
+okio = "3.15.0"
+datetime = "0.8.0"
+koin = "4.2.2"
+navigation = "2.10.0"
+lifecycle = "2.11.0"
+coil = "3.3.0"
+gitliveFirebase = "3.0.0-beta1"
+
+[libraries]
+androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastore" }
+androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
+androidx-datastore-core-okio = { group = "androidx.datastore", name = "datastore-core-okio", version.ref = "datastore" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
+okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+compose-ui-uikit = { group = "org.jetbrains.compose.ui", name = "ui-uikit", version.ref = "composeMultiplatform" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
+koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin" }
+navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+gitlive-auth = { group = "dev.gitlive", name = "firebase-auth", version.ref = "gitliveFirebase" }
+gitlive-firestore = { group = "dev.gitlive", name = "firebase-firestore", version.ref = "gitliveFirebase" }
+gitlive-storage = { group = "dev.gitlive", name = "firebase-storage", version.ref = "gitliveFirebase" }
+gitlive-functions = { group = "dev.gitlive", name = "firebase-functions", version.ref = "gitliveFirebase" }
+gitlive-messaging = { group = "dev.gitlive", name = "firebase-messaging", version.ref = "gitliveFirebase" }
+
+[plugins]
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

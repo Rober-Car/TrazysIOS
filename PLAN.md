@@ -1,0 +1,54 @@
+# PLAN.md — Trazys Cliente iOS
+
+## Estado actual
+
+- **Fase:** 0A completada (bootstrap y validación en Windows). Siguiente: 1A.
+- **Hecho:** repo, wrapper 8.14.4, catálogo de versiones, targets iOS/JVM,
+  DataStore común, `PreferencesRepository`, test JVM, App mínima, shell iOS
+  y documentación.
+- **Verificado en Windows:**
+  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (1/1 prueba).
+  - `:composeApp:compileKotlinIosSimulatorArm64` → BUILD SUCCESSFUL.
+- **Ajustes surgidos al compilar:**
+  - JVM: `File.toOkioPath()` (okio 3.15.0) se invoca con el companion como
+    receptor: `with(Path.Companion) { file.toOkioPath() }`.
+  - iOS: `timeIntervalSince1970` es una extensión de Foundation y requiere
+    `import platform.Foundation.timeIntervalSince1970`.
+  - iOS: `URLForDirectory`/`createDirectoryAtPath` requieren
+    `@file:OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)`.
+- **Límite de Windows:** compila Kotlin/Native, pero no enlaza Firebase,
+  no ejecuta simulador ni firma.
+
+## Decisiones de alcance
+
+- Solo **Trazys Cliente** por ahora; Admin se decide al final.
+- Proyecto **aislado**: no se toca la app Android.
+- Push después del núcleo; APNs en Fase 4.
+- Sin target Android de desarrollo: la validación runtime espera al Mac.
+
+## Fases
+
+| Fase | Contenido | Estado |
+|---|---|---|
+| 0A | Repo, bootstrap KMP, DataStore, shell iOS, compilación Windows | Completada |
+| 0B | Mac, Xcode, Apple Developer, Firebase iOS, APNs | Bloqueada por infraestructura |
+| 1A | Spike GitLive/Firebase, navegación, Coil, Koin, fechas | Pendiente |
+| 1B | Primera build en iPhone | Bloqueada por Mac |
+| 2 | Núcleo: modelos, repos, vinculación, errores, tests | Pendiente |
+| 3 | UI: tema, recursos, 21 rutas, pantallas | Pendiente |
+| 4 | Push/APNs, fotos, privacy manifest, backend | Pendiente |
+| 5 | TestFlight y App Store | Pendiente |
+
+## Bloqueos
+
+1. No hay Mac ni Xcode: no se puede enlazar, ejecutar ni firmar.
+2. Apple Developer Program pendiente.
+3. `GoogleService-Info.plist` pendiente de descargar desde Firebase Console.
+4. APNs y despliegue de Functions requieren cuenta/CLI y aprobación.
+
+## Siguiente paso
+
+1. Fase 1A: spike de GitLive 3.0.0-beta1 con las operaciones reales
+   (transacción de vinculación, callable `reservar`, Storage).
+2. Validar navegación/lifecycle/Coil/Koin y cerrar versiones.
+3. Portar modelos y repositorios del Cliente.
