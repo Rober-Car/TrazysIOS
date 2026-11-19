@@ -85,6 +85,16 @@ open TrazysiOS.xcodeproj
 
 ## Documentación viva
 
+- `ESTADO.md`: tablero de sesión (ahora, siguiente paso, bloqueos, verificación).
 - `PLAN.md`: fases, estado y bloqueos.
 - `DECISIONS.md`: decisiones cerradas y su motivo.
 - `RULES.md`: reglas de trabajo.
+
+## Flujo con opencode
+
+- Ejecutar opencode **desde esta carpeta** (`TrazysiOS`) para que cargue
+  `opencode.json`, la skill `.opencode/skills/trazys-progreso` y los comandos.
+- Comandos: `/estado` (informe), `/siguiente` (siguiente tarea) y `/cierre`
+  (verifica y actualiza el tablero).
+- Regla de sesión: actualizar `ESTADO.md` al terminar; no commitear sin
+  petición explícita.
