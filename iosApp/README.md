@@ -14,7 +14,7 @@ Multiplatform + Compose Multiplatform).
 ## Puesta en marcha
 
 1. Copia `GoogleService-Info.plist` de Firebase Console a `iosApp/iosApp/`
-   (no se versiona).
+   (no se versiona). `FirebaseApp.configure()` ya se llama en `iOSApp.swift`.
 2. Ajusta `DEVELOPMENT_TEAM` en `project.yml` o en Signing & Capabilities.
 3. Genera el proyecto y ábrelo:
 

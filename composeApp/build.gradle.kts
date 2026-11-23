@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -34,6 +35,19 @@ kotlin {
             implementation(libs.androidx.datastore.core.okio)
             implementation(libs.okio)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.navigation.compose)
+            implementation(libs.lifecycle.viewmodel.compose)
+            implementation(libs.lifecycle.runtime.compose)
+            implementation(libs.coil.compose)
+            implementation(libs.kotlinx.serialization.core)
+            implementation(libs.gitlive.auth)
+            implementation(libs.gitlive.firestore)
+            implementation(libs.gitlive.storage)
+            implementation(libs.gitlive.functions)
         }
         iosMain.dependencies {
             implementation(libs.compose.ui.uikit)

@@ -73,6 +73,12 @@ open TrazysiOS.xcodeproj
 - iOS: importar `platform.Foundation.timeIntervalSince1970` (es extensión).
 - iOS: `NSFileManager.URLForDirectory`/`createDirectoryAtPath` requieren opt-in
   `kotlinx.cinterop.ExperimentalForeignApi`.
+- Koin 4: `GlobalContext` no existe en `commonMain`; arrancar con
+  `startKoin` + flag de idempotencia.
+- GitLive 3.0.0-beta1 sí publica variante JVM: `commonMain` compila en
+  `jvm` e iOS. Messaging queda para Fase 4.
+- Firebase iOS: `FirebaseApp.configure()` va en `iOSApp.swift` y requiere
+  `GoogleService-Info.plist` en el bundle (no versionado).
 - `jvmTest` y `compileKotlinIosSimulatorArm64` verificados en Windows.
 
 ## Convenciones

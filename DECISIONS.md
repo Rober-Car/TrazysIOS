@@ -14,3 +14,6 @@
 | 2026-11-18 | `functions` se modifica con tests y regresión Android | El push iOS necesita `apns` y no debe romper Android |
 | 2026-11-18 | Sin target Android de desarrollo | Decisión del usuario; la validación runtime espera al Mac |
 | 2026-11-18 | Sin commits automáticos | Solo se commitea si se pide explícitamente |
+| 2026-11-23 | Fase 1A: navegación/DI/UI antes del spike GitLive | Todo lo verificable en Windows queda cerrado primero; el runtime de Firebase exige Mac |
+| 2026-11-23 | Plugin `kotlinx-serialization` con runtime 1.9.0 | GitLive lo exige para `@Serializable`, Firestore tipado y callables; 1.9.0 es la versión que declara la beta |
+| 2026-11-23 | Messaging se enlaza en Fase 4 | No hace falta para validar auth/Firestore/Storage y depende de APNs |

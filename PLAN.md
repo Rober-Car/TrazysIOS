@@ -2,12 +2,19 @@
 
 ## Estado actual
 
-- **Fase:** 0A completada (bootstrap y validación en Windows). Siguiente: 1A.
+- **Fase:** 1A en curso (navegación/DI/UI y spike GitLive compilados).
+  Siguiente: modelos del Cliente.
 - **Hecho:** repo, wrapper 8.14.4, catálogo de versiones, targets iOS/JVM,
   DataStore común, `PreferencesRepository`, test JVM, App mínima, shell iOS
   y documentación.
+- **Fase 1A (parcial):** Koin, Navigation, Lifecycle, Coil y datetime
+  conectados; rutas `inicio`/`login`/`home`; Login guarda DNI y Home lee
+  preferencias, carga logo y formatea fecha.
+- **Spike GitLive (compilado):** `FirebaseSpike` con sesión anónima, lectura
+  tipada de Firestore, transacción de vinculación, callable `reservar` y
+  subida a Storage. Requiere validación runtime en Mac.
 - **Verificado en Windows:**
-  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (1/1 prueba).
+  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (2/2 pruebas).
   - `:composeApp:compileKotlinIosSimulatorArm64` → BUILD SUCCESSFUL.
 - **Ajustes surgidos al compilar:**
   - JVM: `File.toOkioPath()` (okio 3.15.0) se invoca con el companion como
@@ -32,7 +39,7 @@
 |---|---|---|
 | 0A | Repo, bootstrap KMP, DataStore, shell iOS, compilación Windows | Completada |
 | 0B | Mac, Xcode, Apple Developer, Firebase iOS, APNs | Bloqueada por infraestructura |
-| 1A | Spike GitLive/Firebase, navegación, Coil, Koin, fechas | Pendiente |
+| 1A | Spike GitLive/Firebase, navegación, Coil, Koin, fechas | En curso |
 | 1B | Primera build en iPhone | Bloqueada por Mac |
 | 2 | Núcleo: modelos, repos, vinculación, errores, tests | Pendiente |
 | 3 | UI: tema, recursos, 21 rutas, pantallas | Pendiente |
@@ -48,7 +55,7 @@
 
 ## Siguiente paso
 
-1. Fase 1A: spike de GitLive 3.0.0-beta1 con las operaciones reales
-   (transacción de vinculación, callable `reservar`, Storage).
-2. Validar navegación/lifecycle/Coil/Koin y cerrar versiones.
-3. Portar modelos y repositorios del Cliente.
+1. Portar modelos y repositorios del Cliente con tests JVM.
+2. Validar en Mac el arranque de Firebase (`GoogleService-Info.plist`) y el
+   runtime de navegación/Coil.
+3. Cerrar Fase 1A.

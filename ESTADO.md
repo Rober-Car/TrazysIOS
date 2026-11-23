@@ -1,29 +1,36 @@
 # ESTADO.md — Tablero de progreso
 
-Actualizado: 2026-11-19
+Actualizado: 2026-11-23
 
 ## Ahora
 
-- **Fase:** 0A completada · 1A pendiente.
-- **Trabajando en:** nada (sesión cerrada).
-- **Último commit:** `59886c6` Fase 0A: bootstrap KMP, DataStore comun y shell iOS.
-- **Remoto:** https://github.com/Rober-Car/TrazysIOS (`main` sincronizado).
+- **Fase:** 1A en curso. Navegación/DI/UI y spike GitLive compilados; faltan
+  los modelos.
+- **Trabajando en:** nada (pendiente de revisión del entregable).
+- **Último commit:** el de esta sesión (si se aprueba) · anterior `3d5ba16`.
+- **Remoto:** https://github.com/Rober-Car/TrazysIOS (`main`).
 
 ## Siguiente paso (en orden)
 
-1. Decidir el arranque de 1A: **spike GitLive** o **navegación/DI/modelos**.
-2. Conectar dependencias ya declaradas en `libs.versions.toml` a
-   `composeApp/build.gradle.kts` (Koin, Navigation, Lifecycle, Coil,
-   kotlinx-datetime y GitLive).
-3. Spike de navegación/DI/UI con 3 rutas placeholder.
-4. Spike Firebase (init, auth, Firestore, Storage, callable `reservar`).
-5. Portar modelos del Cliente desde GestorPro y añadir tests JVM.
+1. Portar modelos del Cliente desde GestorPro con tests JVM.
+2. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
+   con Skiko y navegación real.
+3. Cerrar Fase 1A y actualizar `PLAN.md`.
 
 ## Hecho recientemente
 
-- 2026-11-19: primer commit y push a GitHub del trabajo de Fase 0A.
-- 2026-11-19: alta de `ESTADO.md`, skill `trazys-progreso`, comandos
-  `/estado`, `/siguiente`, `/cierre` y `opencode.json`.
+- 2026-11-23: dependencias conectadas — Koin 4.2.2 (core/compose/viewmodel),
+  Navigation 2.10.0, Lifecycle 2.11.0, Coil 3.3.0 y kotlinx-datetime 0.8.0.
+- 2026-11-23: grafo con rutas `inicio`, `login` y `home`; `appModule` de Koin
+  y arranque idempotente en `MainViewController`.
+- 2026-11-23: Login guarda el DNI en DataStore; Home lee negocio/logo con
+  StateFlow, carga el logo con Coil y muestra la fecha formateada.
+- 2026-11-23: `formatearFechaCorta` + `FechaTest` (2 pruebas JVM en total).
+- 2026-11-23: **spike GitLive** con las operaciones reales: sesión anónima,
+  lectura tipada de Firestore, transacción de vinculación, callable
+  `reservar` y subida a Storage (`FirebaseSpike`).
+- 2026-11-23: plugin `kotlinx-serialization` 1.9.0 y `FirebaseApp.configure()`
+  en el punto de entrada Swift.
 
 ## Bloqueos
 
@@ -32,16 +39,27 @@ Actualizado: 2026-11-19
 3. Falta `GoogleService-Info.plist` (no se versiona).
 4. APNs y despliegue de `functions/` requieren cuenta, CLI y aprobación.
 
+## Riesgos
+
+- **Skiko/Coil:** Coil 3.3.0 arrastra Skiko 0.9.4.2 frente a 0.144.6 de CMP
+  1.11.1 (aviso del checker). Compila y los tests pasan; validar runtime en
+  Mac. Si falla, revisar la versión de Coil con `DECISIONS.md` (R4).
+- La validación real de Navigation/Koin/Coil en iOS no es posible en Windows.
+- **GitLive:** la beta 3.0.0-beta1 declara Kotlin/stdlib 2.4.20 y compilamos con
+  2.4.10; compila en JVM e iOS, pero vigilarlo al actualizar Kotlin (R4).
+- **Messaging** queda para la Fase 4 (APNs); no se enlazó todavía.
+
 ## Verificación
 
-- Última ejecución: 2026-11-19 (Fase 0A).
-- `.\gradlew.bat :composeApp:jvmTest` → OK (1/1).
-- `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
+- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (2/2).
+- 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinJvm` → OK.
+- 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
+- Nota: en Koin 4 `GlobalContext` no está en common; se usa un flag de arranque.
 
 ## Decisiones pendientes
 
-- Orden de la Fase 1A: spike GitLive primero (valida el riesgo beta) o
-  navegación/DI/modelos primero (avance seguro y visible).
+- Validar en Mac el warning Skiko/Coil.
+- Orden cerrado de 1A: navegación/DI/UI primero (ver `DECISIONS.md`).
 
 ## Regla de sesión
 

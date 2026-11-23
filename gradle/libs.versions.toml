@@ -11,6 +11,7 @@ navigation = "2.10.0"
 lifecycle = "2.11.0"
 coil = "3.3.0"
 gitliveFirebase = "3.0.0-beta1"
+serialization = "1.9.0"
 
 [libraries]
 androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastore" }
@@ -28,6 +29,7 @@ navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navi
 lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "serialization" }
 gitlive-auth = { group = "dev.gitlive", name = "firebase-auth", version.ref = "gitliveFirebase" }
 gitlive-firestore = { group = "dev.gitlive", name = "firebase-firestore", version.ref = "gitliveFirebase" }
 gitlive-storage = { group = "dev.gitlive", name = "firebase-storage", version.ref = "gitliveFirebase" }
@@ -38,3 +40,4 @@ gitlive-messaging = { group = "dev.gitlive", name = "firebase-messaging", versio
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
