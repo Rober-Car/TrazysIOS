@@ -28,3 +28,4 @@
 | 2026-11-24 | Buzón de avisos limitado a `notificaciones_por_destinatario` | Es la colección propia del cliente; marcar leída y eliminar se hacen sobre el documento del buzón y las escrituras son tolerantes (`false` sin excepción) |
 | 2026-11-24 | Solicitud de baja PENDIENTE con ID determinista y sin duplicados | El cliente no cambia su estado: solo pide la baja; el ADMIN la resuelve. El ID `baja_{clienteId}_{fecha}` y la comprobación previa evitan duplicados |
 | 2026-11-24 | Eliminación de cuenta solo por `eliminarMiCuenta` tras reautenticar | El borrado de Auth/Firestore/Storage exige Admin SDK; la app limpia datos locales y cierra sesión únicamente después del éxito remoto |
+| 2026-11-24 | Denuncias UGC creadas por el cliente con estado PENDIENTE | El denunciante sale de Auth y la resolución es del ADMIN; tipo/motivo se validan localmente con los mismos valores que las Rules y la descripción se recorta a 500 caracteres |

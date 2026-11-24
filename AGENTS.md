@@ -113,6 +113,10 @@ open TrazysiOS.xcodeproj
 - Cuenta: `FuenteEliminacionCuenta.invoke()` llama sin argumentos a
   `eliminarMiCuenta` en `europe-west1`; `CuentaRepository` reautentica,
   limpia DataStore y cierra sesión solo tras el éxito remoto.
+- Denuncias: `FuenteDenuncias` escribe `denuncias/denuncia_{epoch}_{sufijo}`
+  con `estado = PENDIENTE`; `DenunciaRepository` valida tipo/motivo con
+  `TiposContenidoDenunciable`/`MotivosDenuncia`, exige negocio/referencia y
+  recorta la descripción a `MAX_DESCRIPCION_DENUNCIA` (500).
 
 ## Convenciones
 

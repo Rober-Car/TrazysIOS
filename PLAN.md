@@ -3,7 +3,7 @@
 ## Estado actual
 
 - **Fase:** 2 en curso (auth, vinculación, sesiones/reservas, Home,
-  notificaciones, baja y cuenta cerrados con tests).
+  notificaciones, baja, cuenta y denuncias cerrados con tests).
 - **Hecho:** repo, wrapper 8.14.4, catálogo de versiones, targets iOS/JVM,
   DataStore común, `PreferencesRepository`, test JVM, App mínima, shell iOS
   y documentación.
@@ -32,8 +32,12 @@
   (callable `eliminarMiCuenta`), `NotificacionRepository`,
   `SolicitudBajaRepository` y `CuentaRepository` (reautenticación, limpieza
   local y cierre de sesión tras el éxito remoto). 23 pruebas nuevas.
+- **Fase 2 (denuncias UGC):** `TiposContenidoDenunciable`,
+  `MotivosDenuncia`, `FuenteDenuncias` (estado PENDIENTE, fecha y descripción
+  máxima de 500) y `DenunciaRepository` con validación y errores de dominio.
+  9 pruebas nuevas.
 - **Verificado en Windows:**
-  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (88/88 pruebas).
+  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (97/97 pruebas).
   - `:composeApp:compileKotlinIosSimulatorArm64` → BUILD SUCCESSFUL.
   - `:composeApp:compileKotlinJvm` → BUILD SUCCESSFUL.
 - **Ajustes surgidos al compilar:**
@@ -65,7 +69,7 @@
 | 0B | Mac, Xcode, Apple Developer, Firebase iOS, APNs | Bloqueada por infraestructura |
 | 1A | Spike GitLive/Firebase, navegación, Coil, Koin, fechas, modelos | Completada (Windows) |
 | 1B | Primera build en iPhone | Bloqueada por Mac |
-| 2 | Núcleo: auth, repos, vinculación, reservas, Home, avisos, baja/cuenta | En curso |
+| 2 | Núcleo: auth, repos, vinculación, reservas, Home, avisos, baja/cuenta, denuncias | En curso |
 | 3 | UI: tema, recursos, 21 rutas, pantallas | Pendiente |
 | 4 | Push/APNs, fotos, privacy manifest, backend | Pendiente |
 | 5 | TestFlight y App Store | Pendiente |
@@ -79,6 +83,7 @@
 
 ## Siguiente paso
 
-1. Fase 2: revisar denuncias, dispositivos, fotos y términos; decidir alcance.
+1. Fase 2: dispositivos/FCM, fotos y términos se ubican en Fase 4/UI; revisar
+   si queda algún dato del núcleo antes de pasar a la Fase 3.
 2. Validar en Mac el arranque de Firebase (`GoogleService-Info.plist`) y el
    runtime de navegación/Coil/lectura tipada/callables.

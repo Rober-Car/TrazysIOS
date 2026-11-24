@@ -5,21 +5,25 @@ Actualizado: 2026-11-24
 ## Ahora
 
 - **Fase:** 2 en curso. Auth, vinculación (VÍA 1/VÍA 2), sesiones/reservas,
-  estado del Home, notificaciones, solicitud de baja y eliminación de cuenta
-  portados con fuentes inyectables y tests.
+  estado del Home, notificaciones, solicitud de baja, eliminación de cuenta y
+  denuncias UGC portados con fuentes inyectables y tests.
 - **Trabajando en:** nada (pendiente de revisión del entregable).
-- **Último commit:** `e9c58e7` (sesiones/reservas/Home) con push a `main`.
+- **Último commit:** `c25f740` (notificaciones/baja/cuenta) con push a `main`.
 - **Remoto:** https://github.com/Rober-Car/TrazysIOS (`main`).
 
 ## Siguiente paso (en orden)
 
-1. Revisar el resto del núcleo del Cliente (denuncias, dispositivos, fotos y
-   términos) para decidir si entra en la Fase 2 o se pospone a la Fase 4.
+1. Cerrar la Fase 2: dispositivos/FCM, fotos y términos dependen de Fase 4/UI;
+   decidir si queda algo más del núcleo antes de pasar a la Fase 3.
 2. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
    con Skiko, navegación real y lectura tipada con los modelos portados.
 
 ## Hecho recientemente
 
+- 2026-11-24: **Fase 2 (denuncias UGC):** `TiposContenidoDenunciable`,
+  `MotivosDenuncia`, `FuenteDenuncias` (`denuncias`, estado PENDIENTE, fecha y
+  descripción limitada a 500) y `DenunciaRepository` con validación de tipo,
+  motivo, negocio/referencia y traducción de errores. 9 pruebas nuevas.
 - 2026-11-24: **Fase 2 (notificaciones/baja/cuenta):** fuentes
   `FuenteNotificaciones` (`notificaciones_por_destinatario`, filtros
   `clienteId` + `negocioId`, orden `fechaEnvio` desc, marcar leída y eliminar)
@@ -28,7 +32,8 @@ Actualizado: 2026-11-24
   `eliminarMiCuenta` (Admin SDK). Repositorios `NotificacionRepository`,
   `SolicitudBajaRepository` y `CuentaRepository` (reautenticación previa,
   limpieza local y cierre de sesión solo tras el éxito remoto).
-- 2026-11-24: 23 pruebas nuevas (88/88 en total).
+- 2026-11-24: 23 pruebas nuevas; total 88 al cerrar esa rebanada (97/97 con
+  denuncias).
 - 2026-11-24: **Fase 2 (sesiones/reservas/Home):** fuentes `FuenteClientes`,
   `FuenteSesiones` (servicio + sesiones por servicio con filtros de Rules) y
   `FuenteReservas` (callables `reservar`/`cancelarReserva` en `europe-west1`
@@ -75,9 +80,10 @@ Actualizado: 2026-11-24
 
 ## Verificación
 
-- 2026-11-24: `.\gradlew.bat :composeApp:jvmTest` → OK (88/88).
+- 2026-11-24: `.\gradlew.bat :composeApp:jvmTest` → OK (97/97).
 - 2026-11-24: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
 - 2026-11-24: `.\gradlew.bat :composeApp:compileKotlinJvm` → OK.
+- 2026-11-24: `.\gradlew.bat :composeApp:jvmTest` → OK (88/88).
 - 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (65/65).
 - Nota: en Koin 4 `GlobalContext` no está en common; se usa un flag de arranque.
 

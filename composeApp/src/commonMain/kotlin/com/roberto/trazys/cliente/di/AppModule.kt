@@ -9,6 +9,8 @@ import com.roberto.trazys.cliente.data.firebase.FuenteClientesVinculacion
 import com.roberto.trazys.cliente.data.firebase.FuenteClientesVinculacionGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteCodigos
 import com.roberto.trazys.cliente.data.firebase.FuenteCodigosGitLive
+import com.roberto.trazys.cliente.data.firebase.FuenteDenuncias
+import com.roberto.trazys.cliente.data.firebase.FuenteDenunciasGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteEliminacionCuenta
 import com.roberto.trazys.cliente.data.firebase.FuenteEliminacionCuentaGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteIndices
@@ -31,6 +33,7 @@ import com.roberto.trazys.cliente.data.firebase.FuenteUsuarios
 import com.roberto.trazys.cliente.data.firebase.FuenteUsuariosGitLive
 import com.roberto.trazys.cliente.data.repository.AutenticacionRepository
 import com.roberto.trazys.cliente.data.repository.CuentaRepository
+import com.roberto.trazys.cliente.data.repository.DenunciaRepository
 import com.roberto.trazys.cliente.data.repository.HomeRepository
 import com.roberto.trazys.cliente.data.repository.NotificacionRepository
 import com.roberto.trazys.cliente.data.repository.PerfilPendienteRepository
@@ -60,6 +63,7 @@ val appModule = module {
     single<FuenteNotificaciones> { FuenteNotificacionesGitLive() }
     single<FuenteSolicitudes> { FuenteSolicitudesGitLive() }
     single<FuenteEliminacionCuenta> { FuenteEliminacionCuentaGitLive() }
+    single<FuenteDenuncias> { FuenteDenunciasGitLive() }
     single { AutenticacionRepository(get(), get()) }
     single { PerfilPendienteRepository(get(), get()) }
     single { VinculacionRepository(get(), get(), get(), get(), get(), get(), get()) }
@@ -69,6 +73,7 @@ val appModule = module {
     single { NotificacionRepository(get()) }
     single { SolicitudBajaRepository(get(), get(), ::horaActualMilis) }
     single { CuentaRepository(get(), get(), get()) }
+    single { DenunciaRepository(get(), get(), ::horaActualMilis) }
 }
 
 private var koinIniciado = false
