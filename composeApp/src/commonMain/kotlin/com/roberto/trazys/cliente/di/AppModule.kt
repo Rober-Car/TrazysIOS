@@ -9,8 +9,12 @@ import com.roberto.trazys.cliente.data.firebase.FuenteClientesVinculacion
 import com.roberto.trazys.cliente.data.firebase.FuenteClientesVinculacionGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteCodigos
 import com.roberto.trazys.cliente.data.firebase.FuenteCodigosGitLive
+import com.roberto.trazys.cliente.data.firebase.FuenteEliminacionCuenta
+import com.roberto.trazys.cliente.data.firebase.FuenteEliminacionCuentaGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteIndices
 import com.roberto.trazys.cliente.data.firebase.FuenteIndicesGitLive
+import com.roberto.trazys.cliente.data.firebase.FuenteNotificaciones
+import com.roberto.trazys.cliente.data.firebase.FuenteNotificacionesGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteNegocios
 import com.roberto.trazys.cliente.data.firebase.FuenteNegociosGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteNotificacionesAdmin
@@ -21,14 +25,19 @@ import com.roberto.trazys.cliente.data.firebase.FuenteReservas
 import com.roberto.trazys.cliente.data.firebase.FuenteReservasGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteSesiones
 import com.roberto.trazys.cliente.data.firebase.FuenteSesionesGitLive
+import com.roberto.trazys.cliente.data.firebase.FuenteSolicitudes
+import com.roberto.trazys.cliente.data.firebase.FuenteSolicitudesGitLive
 import com.roberto.trazys.cliente.data.firebase.FuenteUsuarios
 import com.roberto.trazys.cliente.data.firebase.FuenteUsuariosGitLive
 import com.roberto.trazys.cliente.data.repository.AutenticacionRepository
+import com.roberto.trazys.cliente.data.repository.CuentaRepository
 import com.roberto.trazys.cliente.data.repository.HomeRepository
+import com.roberto.trazys.cliente.data.repository.NotificacionRepository
 import com.roberto.trazys.cliente.data.repository.PerfilPendienteRepository
 import com.roberto.trazys.cliente.data.repository.PreferencesRepository
 import com.roberto.trazys.cliente.data.repository.ReservaRepository
 import com.roberto.trazys.cliente.data.repository.SesionRepository
+import com.roberto.trazys.cliente.data.repository.SolicitudBajaRepository
 import com.roberto.trazys.cliente.data.repository.VinculacionRepository
 import com.roberto.trazys.cliente.time.horaActualMilis
 import org.koin.core.context.startKoin
@@ -48,12 +57,18 @@ val appModule = module {
     single<FuenteClientes> { FuenteClientesGitLive() }
     single<FuenteSesiones> { FuenteSesionesGitLive() }
     single<FuenteReservas> { FuenteReservasGitLive() }
+    single<FuenteNotificaciones> { FuenteNotificacionesGitLive() }
+    single<FuenteSolicitudes> { FuenteSolicitudesGitLive() }
+    single<FuenteEliminacionCuenta> { FuenteEliminacionCuentaGitLive() }
     single { AutenticacionRepository(get(), get()) }
     single { PerfilPendienteRepository(get(), get()) }
     single { VinculacionRepository(get(), get(), get(), get(), get(), get(), get()) }
     single { SesionRepository(get()) }
     single { ReservaRepository(get(), get()) }
     single { HomeRepository(get(), get(), ::horaActualMilis) }
+    single { NotificacionRepository(get()) }
+    single { SolicitudBajaRepository(get(), get(), ::horaActualMilis) }
+    single { CuentaRepository(get(), get(), get()) }
 }
 
 private var koinIniciado = false

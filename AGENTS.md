@@ -103,6 +103,17 @@ open TrazysiOS.xcodeproj
   .invoke(mapOf("sesionId" to id))`. La identidad la deriva el backend.
 - `jvmTest` y `compileKotlinIosSimulatorArm64` verificados en Windows.
 
+- Avisos: `FuenteNotificaciones` consulta `notificaciones_por_destinatario`
+  con filtros `clienteId` + `negocioId` y `orderBy("fechaEnvio", DESCENDING)`
+  (requiere índice compuesto); marcar leída usa `updateFields` y eliminar solo
+  borra el documento del buzón.
+- Baja: `FuenteSolicitudes` filtra `negocioId` + `idCliente`, crea
+  `solicitudes/baja_{clienteId}_{fecha}` con `estado = PENDIENTE` y el repo
+  rechaza duplicados pendientes.
+- Cuenta: `FuenteEliminacionCuenta.invoke()` llama sin argumentos a
+  `eliminarMiCuenta` en `europe-west1`; `CuentaRepository` reautentica,
+  limpia DataStore y cierra sesión solo tras el éxito remoto.
+
 ## Convenciones
 
 - Documentación y mensajes en español; nombres existentes no se traducen.

@@ -25,3 +25,6 @@
 | 2026-11-24 | Reservar/cancelar solo por las callables `reservar`/`cancelarReserva` | Las reglas de plazas, estado, contratación, apertura y combinación viven en el backend; el Cliente no replica la transacción |
 | 2026-11-24 | Fechas de Firestore: primero `Timestamp`, luego número | El contrato mezcla `Timestamp` (fechas de ficha) y epoch numérico; el helper tolera ambos sin romper la lectura |
 | 2026-11-24 | Estado del Home derivado en `util/EstadoHome.kt` con reloj inyectable | Mantiene la UI como representación pura y permite probar `PAGO_VENCIDO` sin depender del reloj del equipo |
+| 2026-11-24 | Buzón de avisos limitado a `notificaciones_por_destinatario` | Es la colección propia del cliente; marcar leída y eliminar se hacen sobre el documento del buzón y las escrituras son tolerantes (`false` sin excepción) |
+| 2026-11-24 | Solicitud de baja PENDIENTE con ID determinista y sin duplicados | El cliente no cambia su estado: solo pide la baja; el ADMIN la resuelve. El ID `baja_{clienteId}_{fecha}` y la comprobación previa evitan duplicados |
+| 2026-11-24 | Eliminación de cuenta solo por `eliminarMiCuenta` tras reautenticar | El borrado de Auth/Firestore/Storage exige Admin SDK; la app limpia datos locales y cierra sesión únicamente después del éxito remoto |
