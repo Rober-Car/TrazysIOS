@@ -4,16 +4,16 @@ Actualizado: 2026-11-23
 
 ## Ahora
 
-- **Fase:** 2 en curso. Sesión de autenticación portada con fuentes remotas
-  inyectables y tests; siguiente: vinculación (código + DNI).
+- **Fase:** 2 en curso. Auth y vinculación (VÍA 1/VÍA 2) portadas con fuentes
+  inyectables y tests; siguiente: negocio/sesiones/reservas.
 - **Trabajando en:** nada (pendiente de revisión del entregable).
-- **Último commit:** el de esta sesión (si se aprueba) · anterior `24a127e`.
+- **Último commit:** el de esta sesión (si se aprueba) · anterior `b9596f4`.
 - **Remoto:** https://github.com/Rober-Car/TrazysIOS (`main`).
 
 ## Siguiente paso (en orden)
 
-1. Portar `PerfilPendienteRepository` y `VinculacionRepository` (VÍA 1/VÍA 2)
-   con fuentes inyectables y tests de la lógica de decisión.
+1. Portar sesiones/reservas (callables `reservar`/`cancelarReserva`) y la
+   lectura del Home (negocio, ficha y período) con fuentes inyectables.
 2. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
    con Skiko, navegación real y lectura tipada con los modelos portados.
 
@@ -36,11 +36,12 @@ Actualizado: 2026-11-23
   estados del Home) con `@Serializable` en los documentos de Firestore y
   `kotlinx.datetime.DayOfWeek`; `HorarioParseo` conserva compatibilidad con el
   formato antiguo.
-- 2026-11-23: **Fase 2 (auth):** `ErrorAuth`/`ResultadoSesion`, fuentes
-  `FuenteAutenticacion`/`FuenteUsuarios` (GitLive + interfaz), repo con alta
-  transaccional, login que exige rol CLIENTE y cuenta activa, recuperación sin
-  revelar cuentas y cambio de contraseña con reautenticación; validaciones
-  puras y registro en Koin.
+- 2026-11-23: **Fase 2 (vinculación):** `ErrorVinculacion`/`ResultadoVinculacion`,
+  `PerfilPendienteRepository`, fuentes de códigos, centros públicos, índices,
+  fichas y aviso al ADMIN. VÍA 1 vincula la ficha libre; VÍA 2 crea ficha +
+  índice + vínculo en la misma transacción. La declaración temporal y el perfil
+  solo se borran al completar correctamente. Transferencia de foto pendiente de
+  la fase de Storage.
 
 ## Bloqueos
 
@@ -61,8 +62,9 @@ Actualizado: 2026-11-23
 
 ## Verificación
 
-- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (20/20: 8 auth, 3
-  validaciones, 5 horario, 2 modelos, 1 fechas, 1 DataStore).
+- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (32/32: 8 auth, 12
+  vinculación, 2 perfil, 3 validaciones, 2 identificadores, 5 horario, 2
+  modelos, 1 fechas, 1 DataStore).
 - 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinJvm` → OK.
 - 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
 - Nota: en Koin 4 `GlobalContext` no está en common; se usa un flag de arranque.

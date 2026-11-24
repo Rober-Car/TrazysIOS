@@ -2,7 +2,8 @@
 
 ## Estado actual
 
-- **Fase:** 2 en curso (auth cerrada con tests); siguiente: vinculación.
+- **Fase:** 2 en curso (auth y vinculación cerradas con tests); siguiente:
+  sesiones/reservas y Home.
 - **Hecho:** repo, wrapper 8.14.4, catálogo de versiones, targets iOS/JVM,
   DataStore común, `PreferencesRepository`, test JVM, App mínima, shell iOS
   y documentación.
@@ -17,8 +18,11 @@
   horarios) y tests de `HorarioParseo`/estados.
 - **Fase 2 (auth):** `AutenticacionRepository` con fuentes inyectables,
   `ErrorAuth`/`ResultadoSesion`, validaciones puras y 11 pruebas nuevas.
+- **Fase 2 (vinculación):** `VinculacionRepository` con VÍA 1/VÍA 2,
+  `PerfilPendienteRepository`, fuentes de códigos/centros/índices/fichas,
+  aviso idempotente al ADMIN y 16 pruebas nuevas.
 - **Verificado en Windows:**
-  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (20/20 pruebas).
+  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (32/32 pruebas).
   - `:composeApp:compileKotlinIosSimulatorArm64` → BUILD SUCCESSFUL.
 - **Ajustes surgidos al compilar:**
   - JVM: `File.toOkioPath()` (okio 3.15.0) se invoca con el companion como
@@ -59,7 +63,7 @@
 
 ## Siguiente paso
 
-1. Fase 2: `PerfilPendienteRepository` y `VinculacionRepository` (VÍA 1/VÍA 2)
-   con fuentes inyectables y tests de la lógica de decisión.
+1. Fase 2: sesiones/reservas (callables `reservar`/`cancelarReserva`) y Home
+   (negocio, ficha, período) con fuentes inyectables y tests.
 2. Validar en Mac el arranque de Firebase (`GoogleService-Info.plist`) y el
    runtime de navegación/Coil/lectura tipada.

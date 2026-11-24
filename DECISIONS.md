@@ -20,3 +20,5 @@
 | 2026-11-23 | Modelos portados tal cual; `@Serializable` solo en documentos de Firestore | Mantiene el contrato remoto y permite `data<T>()`; el horario se reconstruye desde mapas crudos y no necesita serialización |
 | 2026-11-23 | `kotlinx.datetime.DayOfWeek` en el horario | Elimina `java.time` para que el modelo compile en Kotlin/Native; `valueOf` conserva las claves `MONDAY`… del contrato |
 | 2026-11-23 | Repositorios sobre interfaces `Fuente*`, no sobre Firebase directo | Permite tests JVM con dobles y aísla las excepciones de GitLive; el texto de error lo resuelve la UI desde `ErrorAuth` |
+| 2026-11-23 | VÍA 2 sin transferir foto local (por ahora) | La subida depende de Storage, términos y ficheros iOS; se pospone a la fase de fotos sin bloquear ficha/índice. El perfil se borra igualmente |
+| 2026-11-23 | Transacciones de vinculación dentro de la fuente, no del repositorio | Firestore exige lecturas antes de escrituras y reintentos; el repo decide el flujo y la fuente garantiza atomicidad y unicidad |

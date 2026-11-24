@@ -32,8 +32,10 @@ composeApp/src/
 ├── commonMain/kotlin/com/roberto/trazys/cliente/
 │   ├── data/datastore/   # claves + creador DataStore (expect)
 │   ├── data/error/       # ErrorAuth, ResultadoSesion, ErrorRemoto
-│   ├── data/firebase/    # fuentes GitLive (auth, usuarios, Firestore…)
-│   ├── data/repository/  # AutenticacionRepository, PreferencesRepository
+│   ├── data/firebase/    # fuentes GitLive (auth, usuarios, perfiles, códigos,
+│   │                     # centros, índices, fichas, notificaciones)
+│   ├── data/repository/  # Autenticacion, PerfilPendiente, Vinculacion,
+│   │                     # Preferences
 │   ├── di/               # appModule + arranque Koin
 │   ├── model/            # modelos del Cliente (contrato Firestore)
 │   ├── navigation/       # rutas y grafo
@@ -91,6 +93,8 @@ open TrazysiOS.xcodeproj
   usar `DocumentSnapshot.get<T>("campo")` (con `contains` para opcionales).
 - `DocumentReference.updateFields { "campo" to valor }` evita el `update`
   deprecado; los documentos de `usuarios` se leen campo a campo.
+- `DocumentSnapshot` de GitLive se lee con la extensión `campoString` (definida
+  en `FuentePerfiles.kt`) o `get<T>`; `set(map, merge = true)` para VÍA 1.
 - `jvmTest` y `compileKotlinIosSimulatorArm64` verificados en Windows.
 
 ## Convenciones
