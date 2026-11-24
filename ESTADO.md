@@ -4,18 +4,18 @@ Actualizado: 2026-11-23
 
 ## Ahora
 
-- **Fase:** 1A en curso. Navegación/DI/UI y spike GitLive compilados; faltan
-  los modelos.
+- **Fase:** 1A completa en Windows. Navegación/DI/UI, spike GitLive y modelos
+  del Cliente portados y probados; queda la validación runtime en Mac.
 - **Trabajando en:** nada (pendiente de revisión del entregable).
-- **Último commit:** el de esta sesión (si se aprueba) · anterior `3d5ba16`.
+- **Último commit:** el de esta sesión (si se aprueba) · anterior `7b493ca`.
 - **Remoto:** https://github.com/Rober-Car/TrazysIOS (`main`).
 
 ## Siguiente paso (en orden)
 
-1. Portar modelos del Cliente desde GestorPro con tests JVM.
-2. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
-   con Skiko y navegación real.
-3. Cerrar Fase 1A y actualizar `PLAN.md`.
+1. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
+   con Skiko, navegación real y lectura tipada con los modelos portados.
+2. Arrancar Fase 2 con repositorios (vinculación sin DNI, errores de dominio)
+   sobre `data/firebase/FirebaseSpike.kt`.
 
 ## Hecho recientemente
 
@@ -31,6 +31,11 @@ Actualizado: 2026-11-23
   `reservar` y subida a Storage (`FirebaseSpike`).
 - 2026-11-23: plugin `kotlinx-serialization` 1.9.0 y `FirebaseApp.configure()`
   en el punto de entrada Swift.
+- 2026-11-23: **modelos del Cliente** portados a `commonMain/.../model/`
+  (Cliente, Sesion, Servicio, Reserva, Horario, Notificacion, SolicitudBaja,
+  estados del Home) con `@Serializable` en los documentos de Firestore y
+  `kotlinx.datetime.DayOfWeek`; `HorarioParseo` conserva compatibilidad con el
+  formato antiguo.
 
 ## Bloqueos
 
@@ -51,15 +56,15 @@ Actualizado: 2026-11-23
 
 ## Verificación
 
-- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (2/2).
+- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (9/9: 2 modelos, 5
+  horario, 1 fechas, 1 DataStore).
 - 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinJvm` → OK.
 - 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
 - Nota: en Koin 4 `GlobalContext` no está en common; se usa un flag de arranque.
 
 ## Decisiones pendientes
 
-- Validar en Mac el warning Skiko/Coil.
-- Orden cerrado de 1A: navegación/DI/UI primero (ver `DECISIONS.md`).
+- Validar en Mac el warning Skiko/Coil y la lectura tipada de Firestore.
 
 ## Regla de sesión
 

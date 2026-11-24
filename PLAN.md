@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-- **Fase:** 1A en curso (navegación/DI/UI y spike GitLive compilados).
-  Siguiente: modelos del Cliente.
+- **Fase:** 1A completa en Windows (navegación/DI/UI, spike GitLive y modelos
+  del Cliente compilados y probados). Siguiente: Fase 2 (repositorios).
 - **Hecho:** repo, wrapper 8.14.4, catálogo de versiones, targets iOS/JVM,
   DataStore común, `PreferencesRepository`, test JVM, App mínima, shell iOS
   y documentación.
@@ -13,8 +13,11 @@
 - **Spike GitLive (compilado):** `FirebaseSpike` con sesión anónima, lectura
   tipada de Firestore, transacción de vinculación, callable `reservar` y
   subida a Storage. Requiere validación runtime en Mac.
+- **Modelos portados:** `commonMain/.../model/` con los contratos del Cliente
+  (`@Serializable` en documentos de Firestore, `kotlinx.datetime.DayOfWeek` en
+  horarios) y tests de `HorarioParseo`/estados.
 - **Verificado en Windows:**
-  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (2/2 pruebas).
+  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (9/9 pruebas).
   - `:composeApp:compileKotlinIosSimulatorArm64` → BUILD SUCCESSFUL.
 - **Ajustes surgidos al compilar:**
   - JVM: `File.toOkioPath()` (okio 3.15.0) se invoca con el companion como
@@ -39,9 +42,9 @@
 |---|---|---|
 | 0A | Repo, bootstrap KMP, DataStore, shell iOS, compilación Windows | Completada |
 | 0B | Mac, Xcode, Apple Developer, Firebase iOS, APNs | Bloqueada por infraestructura |
-| 1A | Spike GitLive/Firebase, navegación, Coil, Koin, fechas | En curso |
+| 1A | Spike GitLive/Firebase, navegación, Coil, Koin, fechas, modelos | Completada (Windows) |
 | 1B | Primera build en iPhone | Bloqueada por Mac |
-| 2 | Núcleo: modelos, repos, vinculación, errores, tests | Pendiente |
+| 2 | Núcleo: repos, vinculación, errores, tests | Siguiente |
 | 3 | UI: tema, recursos, 21 rutas, pantallas | Pendiente |
 | 4 | Push/APNs, fotos, privacy manifest, backend | Pendiente |
 | 5 | TestFlight y App Store | Pendiente |
@@ -55,7 +58,7 @@
 
 ## Siguiente paso
 
-1. Portar modelos y repositorios del Cliente con tests JVM.
+1. Fase 2: repositorios del Cliente (vinculación sin DNI, errores de dominio)
+   sobre los modelos portados, con tests JVM.
 2. Validar en Mac el arranque de Firebase (`GoogleService-Info.plist`) y el
-   runtime de navegación/Coil.
-3. Cerrar Fase 1A.
+   runtime de navegación/Coil/lectura tipada.

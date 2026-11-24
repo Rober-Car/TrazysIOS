@@ -31,8 +31,13 @@ Lee este archivo antes de modificar el proyecto.
 composeApp/src/
 ├── commonMain/kotlin/com/roberto/trazys/cliente/
 │   ├── data/datastore/   # claves + creador DataStore (expect)
+│   ├── data/firebase/    # spike GitLive (auth, Firestore, Storage, callable)
 │   ├── data/repository/  # PreferencesRepository
+│   ├── di/               # appModule + arranque Koin
+│   ├── model/            # modelos del Cliente (contrato Firestore)
+│   ├── navigation/       # rutas y grafo
 │   ├── time/             # horaActualMilis (expect)
+│   ├── ui/               # inicio, login, home
 │   ├── util/             # términos
 │   └── App.kt
 ├── iosMain/              # actuals iOS + MainViewController
@@ -79,6 +84,8 @@ open TrazysiOS.xcodeproj
   `jvm` e iOS. Messaging queda para Fase 4.
 - Firebase iOS: `FirebaseApp.configure()` va en `iOSApp.swift` y requiere
   `GoogleService-Info.plist` en el bundle (no versionado).
+- Modelos sin `java.time`: usar `kotlinx.datetime.DayOfWeek`; `valueOf`
+  conserva las claves `MONDAY`… del contrato remoto.
 - `jvmTest` y `compileKotlinIosSimulatorArm64` verificados en Windows.
 
 ## Convenciones

@@ -17,3 +17,5 @@
 | 2026-11-23 | Fase 1A: navegación/DI/UI antes del spike GitLive | Todo lo verificable en Windows queda cerrado primero; el runtime de Firebase exige Mac |
 | 2026-11-23 | Plugin `kotlinx-serialization` con runtime 1.9.0 | GitLive lo exige para `@Serializable`, Firestore tipado y callables; 1.9.0 es la versión que declara la beta |
 | 2026-11-23 | Messaging se enlaza en Fase 4 | No hace falta para validar auth/Firestore/Storage y depende de APNs |
+| 2026-11-23 | Modelos portados tal cual; `@Serializable` solo en documentos de Firestore | Mantiene el contrato remoto y permite `data<T>()`; el horario se reconstruye desde mapas crudos y no necesita serialización |
+| 2026-11-23 | `kotlinx.datetime.DayOfWeek` en el horario | Elimina `java.time` para que el modelo compile en Kotlin/Native; `valueOf` conserva las claves `MONDAY`… del contrato |
