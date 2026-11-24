@@ -19,3 +19,4 @@
 | 2026-11-23 | Messaging se enlaza en Fase 4 | No hace falta para validar auth/Firestore/Storage y depende de APNs |
 | 2026-11-23 | Modelos portados tal cual; `@Serializable` solo en documentos de Firestore | Mantiene el contrato remoto y permite `data<T>()`; el horario se reconstruye desde mapas crudos y no necesita serialización |
 | 2026-11-23 | `kotlinx.datetime.DayOfWeek` en el horario | Elimina `java.time` para que el modelo compile en Kotlin/Native; `valueOf` conserva las claves `MONDAY`… del contrato |
+| 2026-11-23 | Repositorios sobre interfaces `Fuente*`, no sobre Firebase directo | Permite tests JVM con dobles y aísla las excepciones de GitLive; el texto de error lo resuelve la UI desde `ErrorAuth` |

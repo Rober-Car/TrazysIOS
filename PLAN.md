@@ -2,8 +2,7 @@
 
 ## Estado actual
 
-- **Fase:** 1A completa en Windows (navegación/DI/UI, spike GitLive y modelos
-  del Cliente compilados y probados). Siguiente: Fase 2 (repositorios).
+- **Fase:** 2 en curso (auth cerrada con tests); siguiente: vinculación.
 - **Hecho:** repo, wrapper 8.14.4, catálogo de versiones, targets iOS/JVM,
   DataStore común, `PreferencesRepository`, test JVM, App mínima, shell iOS
   y documentación.
@@ -16,8 +15,10 @@
 - **Modelos portados:** `commonMain/.../model/` con los contratos del Cliente
   (`@Serializable` en documentos de Firestore, `kotlinx.datetime.DayOfWeek` en
   horarios) y tests de `HorarioParseo`/estados.
+- **Fase 2 (auth):** `AutenticacionRepository` con fuentes inyectables,
+  `ErrorAuth`/`ResultadoSesion`, validaciones puras y 11 pruebas nuevas.
 - **Verificado en Windows:**
-  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (9/9 pruebas).
+  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (20/20 pruebas).
   - `:composeApp:compileKotlinIosSimulatorArm64` → BUILD SUCCESSFUL.
 - **Ajustes surgidos al compilar:**
   - JVM: `File.toOkioPath()` (okio 3.15.0) se invoca con el companion como
@@ -44,7 +45,7 @@
 | 0B | Mac, Xcode, Apple Developer, Firebase iOS, APNs | Bloqueada por infraestructura |
 | 1A | Spike GitLive/Firebase, navegación, Coil, Koin, fechas, modelos | Completada (Windows) |
 | 1B | Primera build en iPhone | Bloqueada por Mac |
-| 2 | Núcleo: repos, vinculación, errores, tests | Siguiente |
+| 2 | Núcleo: auth, repos, vinculación, errores, tests | En curso |
 | 3 | UI: tema, recursos, 21 rutas, pantallas | Pendiente |
 | 4 | Push/APNs, fotos, privacy manifest, backend | Pendiente |
 | 5 | TestFlight y App Store | Pendiente |
@@ -58,7 +59,7 @@
 
 ## Siguiente paso
 
-1. Fase 2: repositorios del Cliente (vinculación sin DNI, errores de dominio)
-   sobre los modelos portados, con tests JVM.
+1. Fase 2: `PerfilPendienteRepository` y `VinculacionRepository` (VÍA 1/VÍA 2)
+   con fuentes inyectables y tests de la lógica de decisión.
 2. Validar en Mac el arranque de Firebase (`GoogleService-Info.plist`) y el
    runtime de navegación/Coil/lectura tipada.

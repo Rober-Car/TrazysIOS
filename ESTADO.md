@@ -4,18 +4,18 @@ Actualizado: 2026-11-23
 
 ## Ahora
 
-- **Fase:** 1A completa en Windows. Navegación/DI/UI, spike GitLive y modelos
-  del Cliente portados y probados; queda la validación runtime en Mac.
+- **Fase:** 2 en curso. Sesión de autenticación portada con fuentes remotas
+  inyectables y tests; siguiente: vinculación (código + DNI).
 - **Trabajando en:** nada (pendiente de revisión del entregable).
-- **Último commit:** el de esta sesión (si se aprueba) · anterior `7b493ca`.
+- **Último commit:** el de esta sesión (si se aprueba) · anterior `24a127e`.
 - **Remoto:** https://github.com/Rober-Car/TrazysIOS (`main`).
 
 ## Siguiente paso (en orden)
 
-1. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
+1. Portar `PerfilPendienteRepository` y `VinculacionRepository` (VÍA 1/VÍA 2)
+   con fuentes inyectables y tests de la lógica de decisión.
+2. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
    con Skiko, navegación real y lectura tipada con los modelos portados.
-2. Arrancar Fase 2 con repositorios (vinculación sin DNI, errores de dominio)
-   sobre `data/firebase/FirebaseSpike.kt`.
 
 ## Hecho recientemente
 
@@ -36,6 +36,11 @@ Actualizado: 2026-11-23
   estados del Home) con `@Serializable` en los documentos de Firestore y
   `kotlinx.datetime.DayOfWeek`; `HorarioParseo` conserva compatibilidad con el
   formato antiguo.
+- 2026-11-23: **Fase 2 (auth):** `ErrorAuth`/`ResultadoSesion`, fuentes
+  `FuenteAutenticacion`/`FuenteUsuarios` (GitLive + interfaz), repo con alta
+  transaccional, login que exige rol CLIENTE y cuenta activa, recuperación sin
+  revelar cuentas y cambio de contraseña con reautenticación; validaciones
+  puras y registro en Koin.
 
 ## Bloqueos
 
@@ -56,8 +61,8 @@ Actualizado: 2026-11-23
 
 ## Verificación
 
-- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (9/9: 2 modelos, 5
-  horario, 1 fechas, 1 DataStore).
+- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (20/20: 8 auth, 3
+  validaciones, 5 horario, 2 modelos, 1 fechas, 1 DataStore).
 - 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinJvm` → OK.
 - 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
 - Nota: en Koin 4 `GlobalContext` no está en common; se usa un flag de arranque.

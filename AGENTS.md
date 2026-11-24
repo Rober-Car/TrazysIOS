@@ -31,8 +31,9 @@ Lee este archivo antes de modificar el proyecto.
 composeApp/src/
 ├── commonMain/kotlin/com/roberto/trazys/cliente/
 │   ├── data/datastore/   # claves + creador DataStore (expect)
-│   ├── data/firebase/    # spike GitLive (auth, Firestore, Storage, callable)
-│   ├── data/repository/  # PreferencesRepository
+│   ├── data/error/       # ErrorAuth, ResultadoSesion, ErrorRemoto
+│   ├── data/firebase/    # fuentes GitLive (auth, usuarios, Firestore…)
+│   ├── data/repository/  # AutenticacionRepository, PreferencesRepository
 │   ├── di/               # appModule + arranque Koin
 │   ├── model/            # modelos del Cliente (contrato Firestore)
 │   ├── navigation/       # rutas y grafo
@@ -86,6 +87,10 @@ open TrazysiOS.xcodeproj
   `GoogleService-Info.plist` en el bundle (no versionado).
 - Modelos sin `java.time`: usar `kotlinx.datetime.DayOfWeek`; `valueOf`
   conserva las claves `MONDAY`… del contrato remoto.
+- GitLive 3: el wrapper `dev.gitlive.*` no tiene `getString`/`getLong`;
+  usar `DocumentSnapshot.get<T>("campo")` (con `contains` para opcionales).
+- `DocumentReference.updateFields { "campo" to valor }` evita el `update`
+  deprecado; los documentos de `usuarios` se leen campo a campo.
 - `jvmTest` y `compileKotlinIosSimulatorArm64` verificados en Windows.
 
 ## Convenciones
