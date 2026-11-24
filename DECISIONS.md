@@ -22,3 +22,6 @@
 | 2026-11-23 | Repositorios sobre interfaces `Fuente*`, no sobre Firebase directo | Permite tests JVM con dobles y aísla las excepciones de GitLive; el texto de error lo resuelve la UI desde `ErrorAuth` |
 | 2026-11-23 | VÍA 2 sin transferir foto local (por ahora) | La subida depende de Storage, términos y ficheros iOS; se pospone a la fase de fotos sin bloquear ficha/índice. El perfil se borra igualmente |
 | 2026-11-23 | Transacciones de vinculación dentro de la fuente, no del repositorio | Firestore exige lecturas antes de escrituras y reintentos; el repo decide el flujo y la fuente garantiza atomicidad y unicidad |
+| 2026-11-24 | Reservar/cancelar solo por las callables `reservar`/`cancelarReserva` | Las reglas de plazas, estado, contratación, apertura y combinación viven en el backend; el Cliente no replica la transacción |
+| 2026-11-24 | Fechas de Firestore: primero `Timestamp`, luego número | El contrato mezcla `Timestamp` (fechas de ficha) y epoch numérico; el helper tolera ambos sin romper la lectura |
+| 2026-11-24 | Estado del Home derivado en `util/EstadoHome.kt` con reloj inyectable | Mantiene la UI como representación pura y permite probar `PAGO_VENCIDO` sin depender del reloj del equipo |

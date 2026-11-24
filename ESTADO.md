@@ -4,16 +4,16 @@ Actualizado: 2026-11-23
 
 ## Ahora
 
-- **Fase:** 2 en curso. Auth y vinculación (VÍA 1/VÍA 2) portadas con fuentes
-  inyectables y tests; siguiente: negocio/sesiones/reservas.
+- **Fase:** 2 en curso. Auth, vinculación (VÍA 1/VÍA 2), sesiones/reservas y
+  estado del Home portados con fuentes inyectables y tests.
 - **Trabajando en:** nada (pendiente de revisión del entregable).
-- **Último commit:** el de esta sesión (si se aprueba) · anterior `b9596f4`.
+- **Último commit:** `1a0813f` (vinculación) · push corregido a `main`.
 - **Remoto:** https://github.com/Rober-Car/TrazysIOS (`main`).
 
 ## Siguiente paso (en orden)
 
-1. Portar sesiones/reservas (callables `reservar`/`cancelarReserva`) y la
-   lectura del Home (negocio, ficha y período) con fuentes inyectables.
+1. Resto del núcleo del Cliente: notificaciones, solicitud de baja y cuenta
+   (con fuentes inyectables y tests), si se aprueba continuar por ahí.
 2. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
    con Skiko, navegación real y lectura tipada con los modelos portados.
 
@@ -36,6 +36,12 @@ Actualizado: 2026-11-23
   estados del Home) con `@Serializable` en los documentos de Firestore y
   `kotlinx.datetime.DayOfWeek`; `HorarioParseo` conserva compatibilidad con el
   formato antiguo.
+- 2026-11-24: **Fase 2 (sesiones/reservas/Home):** fuentes `FuenteClientes`,
+  `FuenteSesiones` (servicio + sesiones por servicio con filtros de Rules) y
+  `FuenteReservas` (callables `reservar`/`cancelarReserva` en `europe-west1`
+  y lectura de reservas propias). Repositorios `SesionRepository`,
+  `ReservaRepository` y `HomeRepository`; `EstadoHomeCliente` derivado de la
+  ficha con reloj inyectable. 33 pruebas nuevas (65/65 en total).
 - 2026-11-23: **Fase 2 (vinculación):** `ErrorVinculacion`/`ResultadoVinculacion`,
   `PerfilPendienteRepository`, fuentes de códigos, centros públicos, índices,
   fichas y aviso al ADMIN. VÍA 1 vincula la ficha libre; VÍA 2 crea ficha +
@@ -62,11 +68,10 @@ Actualizado: 2026-11-23
 
 ## Verificación
 
-- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (32/32: 8 auth, 12
-  vinculación, 2 perfil, 3 validaciones, 2 identificadores, 5 horario, 2
-  modelos, 1 fechas, 1 DataStore).
-- 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinJvm` → OK.
-- 2026-11-23: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
+- 2026-11-24: `.\gradlew.bat :composeApp:jvmTest` → OK (65/65).
+- 2026-11-24: `.\gradlew.bat :composeApp:compileKotlinJvm` → OK.
+- 2026-11-24: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
+- 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (32/32).
 - Nota: en Koin 4 `GlobalContext` no está en common; se usa un flag de arranque.
 
 ## Decisiones pendientes

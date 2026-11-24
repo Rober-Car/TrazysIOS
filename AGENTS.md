@@ -33,9 +33,10 @@ composeApp/src/
 │   ├── data/datastore/   # claves + creador DataStore (expect)
 │   ├── data/error/       # ErrorAuth, ResultadoSesion, ErrorRemoto
 │   ├── data/firebase/    # fuentes GitLive (auth, usuarios, perfiles, códigos,
-│   │                     # centros, índices, fichas, notificaciones)
+│   │                     # centros, índices, fichas, sesiones, reservas,
+│   │                     # notificaciones)
 │   ├── data/repository/  # Autenticacion, PerfilPendiente, Vinculacion,
-│   │                     # Preferences
+│   │                     # Sesion, Reserva, Home, Preferences
 │   ├── di/               # appModule + arranque Koin
 │   ├── model/            # modelos del Cliente (contrato Firestore)
 │   ├── navigation/       # rutas y grafo
@@ -93,8 +94,13 @@ open TrazysiOS.xcodeproj
   usar `DocumentSnapshot.get<T>("campo")` (con `contains` para opcionales).
 - `DocumentReference.updateFields { "campo" to valor }` evita el `update`
   deprecado; los documentos de `usuarios` se leen campo a campo.
-- `DocumentSnapshot` de GitLive se lee con la extensión `campoString` (definida
-  en `FuentePerfiles.kt`) o `get<T>`; `set(map, merge = true)` para VÍA 1.
+- `DocumentSnapshot` de GitLive se lee con `get<T>("campo")` o los helpers de
+  `CamposFirestore.kt` (`texto`, `entero`, `booleano`, `fechaMilis`); las
+  fechas se intentan como `Timestamp` y, si el campo es numérico, como `Long`.
+- Consultas: `collection(...).where { "campo" equalTo valor }.get()` (wrapper
+  GitLive 3, suspend); no existe `whereEqualTo` en el wrapper.
+- Callables: `Firebase.functions("europe-west1").httpsCallable("reservar")
+  .invoke(mapOf("sesionId" to id))`. La identidad la deriva el backend.
 - `jvmTest` y `compileKotlinIosSimulatorArm64` verificados en Windows.
 
 ## Convenciones
