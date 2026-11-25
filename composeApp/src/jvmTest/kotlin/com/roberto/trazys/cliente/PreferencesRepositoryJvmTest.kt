@@ -81,4 +81,32 @@ class PreferencesRepositoryJvmTest {
         assertEquals("oscuro", repo.themeMode.first())
         assertEquals("en", repo.idioma.first())
     }
+
+    @Test
+    fun limpiarSesionConservaTerminosYAjustesDelDispositivo() = runBlocking {
+        val dir = Files.createTempDirectory("trazys-prefs-sesion").toFile()
+        val repo = PreferencesRepository(crearDataStore(dir))
+
+        repo.setThemeMode("oscuro")
+        repo.setIdioma("en")
+        repo.setIdCliente(42)
+        repo.setNegocioId("negocio-1")
+        repo.setDniPendiente("12345678z")
+        repo.setNombreNegocio("Trazys")
+        repo.setLogoNegocio("https://ejemplo/logo.png")
+        repo.setNotificacionesActivadas(false)
+        repo.guardarAceptacionTerminos("uid-1")
+
+        repo.limpiarSesion()
+
+        assertNull(repo.idCliente.first())
+        assertNull(repo.negocioId.first())
+        assertNull(repo.dniPendiente.first())
+        assertEquals("", repo.nombreNegocio.first())
+        assertEquals("", repo.logoNegocio.first())
+        assertTrue(repo.terminosAceptados("uid-1"))
+        assertFalse(repo.notificacionesActivadas.first())
+        assertEquals("oscuro", repo.themeMode.first())
+        assertEquals("en", repo.idioma.first())
+    }
 }

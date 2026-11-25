@@ -21,6 +21,8 @@ class AutenticacionRepository(
 
     fun haySesionActiva(): Boolean = fuenteAuth.uid != null
 
+    fun uidActual(): String? = fuenteAuth.uid
+
     suspend fun registrar(email: String, contrasena: String): ResultadoSesion {
         validarCredenciales(email, contrasena)?.let { return ResultadoSesion.Fallo(it) }
 

@@ -4,5 +4,7 @@ package com.roberto.trazys.cliente.navigation
 object Routes {
     const val INICIO = "inicio"
     const val LOGIN = "login"
+    const val REGISTRO = "registro"
+    const val RECUPERAR_PASSWORD = "recuperar_password"
     const val HOME = "home"
 }

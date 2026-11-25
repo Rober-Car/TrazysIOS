@@ -117,6 +117,13 @@ open TrazysiOS.xcodeproj
   con `estado = PENDIENTE`; `DenunciaRepository` valida tipo/motivo con
   `TiposContenidoDenunciable`/`MotivosDenuncia`, exige negocio/referencia y
   recorta la descripción a `MAX_DESCRIPCION_DENUNCIA` (500).
+- UI de acceso: `AppNavigation` arranca en Home si `haySesionActiva()`; Login,
+  Registro y Recuperación usan `koinInject<AutenticacionRepository>()` y
+  `mensajeErrorAuth` para los textos. El registro guarda términos con
+  `PreferencesRepository.guardarAceptacionTerminos(uid)` tras el alta.
+- Logout: `AppNavigation` cierra Firebase Auth y llama a
+  `PreferencesRepository.limpiarSesion()` (borra ficha/negocio/DNI y conserva
+  tema, idioma, avisos y términos).
 
 ## Convenciones
 

@@ -160,6 +160,21 @@ class PreferencesRepository(
     }
 
     /**
+     * Limpia los datos de la ficha y del negocio al cerrar sesión. Conserva
+     * tema, idioma, avisos y aceptación de términos (van ligados al dispositivo
+     * o al UID, no a la sesión).
+     */
+    suspend fun limpiarSesion() {
+        dataStore.edit { preferences ->
+            preferences.remove(ID_CLIENTE_KEY)
+            preferences.remove(NEGOCIO_ID_KEY)
+            preferences.remove(DNI_PENDIENTE_KEY)
+            preferences.remove(NOMBRE_NEGOCIO_KEY)
+            preferences.remove(LOGO_NEGOCIO_KEY)
+        }
+    }
+
+    /**
      * Limpia datos personales tras eliminar la cuenta. Conserva tema e idioma
      * porque son preferencias del dispositivo, no de la cuenta.
      */

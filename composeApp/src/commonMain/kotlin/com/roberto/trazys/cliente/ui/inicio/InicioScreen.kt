@@ -9,15 +9,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
-/** Pantalla provisional de inicio (Fase 1A). */
+/** Pantalla de entrada: acceso o alta de cuenta. */
 @Composable
-fun InicioScreen(onContinuar: () -> Unit) {
+fun InicioScreen(
+    onContinuar: () -> Unit,
+    onRegistro: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -30,13 +34,16 @@ fun InicioScreen(onContinuar: () -> Unit) {
         Text(text = "Cliente iOS", style = MaterialTheme.typography.titleMedium)
         Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = "Fase 1A: navegación, Koin, Coil y fechas conectados.",
+            text = "Consulta tus clases, reservas y avisos del centro.",
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium
         )
         Spacer(modifier = Modifier.height(24.dp))
         Button(onClick = onContinuar) {
-            Text(text = "Continuar")
+            Text(text = "Iniciar sesión")
+        }
+        TextButton(onClick = onRegistro) {
+            Text(text = "Crear cuenta")
         }
     }
 }

@@ -29,3 +29,7 @@
 | 2026-11-24 | Solicitud de baja PENDIENTE con ID determinista y sin duplicados | El cliente no cambia su estado: solo pide la baja; el ADMIN la resuelve. El ID `baja_{clienteId}_{fecha}` y la comprobación previa evitan duplicados |
 | 2026-11-24 | Eliminación de cuenta solo por `eliminarMiCuenta` tras reautenticar | El borrado de Auth/Firestore/Storage exige Admin SDK; la app limpia datos locales y cierra sesión únicamente después del éxito remoto |
 | 2026-11-24 | Denuncias UGC creadas por el cliente con estado PENDIENTE | El denunciante sale de Auth y la resolución es del ADMIN; tipo/motivo se validan localmente con los mismos valores que las Rules y la descripción se recorta a 500 caracteres |
+| 2026-11-25 | Pantallas de acceso llaman a `AutenticacionRepository` con `koinInject` | Son formularios simples sobre un repositorio ya probado; se evita un ViewModel intermedio hasta que la pantalla tenga estado compartido complejo |
+| 2026-11-25 | Registro exige términos y los guarda tras el alta | Evita crear cuentas sin aceptación y conserva UID/versión/fecha en DataStore; el login no vuelve a pedirlos si el UID y la versión coinciden |
+| 2026-11-25 | Logout limpia ficha/negocio/DNI pero conserva tema, idioma, avisos y términos | Los datos de ficha no deben filtrarse al siguiente UID; tema/idioma/avisos son del dispositivo y los términos van ligados al UID |
+| 2026-11-25 | Ver/Ocultar contraseña con `TextButton`, sin `material-icons` | Evita añadir una dependencia de iconos no verificada (R4); la alternativa textual cubre la misma función |

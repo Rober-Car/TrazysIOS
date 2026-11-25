@@ -2,8 +2,9 @@
 
 ## Estado actual
 
-- **Fase:** 2 en curso (auth, vinculación, sesiones/reservas, Home,
-  notificaciones, baja, cuenta y denuncias cerrados con tests).
+- **Fase:** 3 en curso (UI); el núcleo de datos de la Fase 2 está cerrado con
+  tests (auth, vinculación, sesiones/reservas, Home, avisos, baja/cuenta y
+  denuncias).
 - **Hecho:** repo, wrapper 8.14.4, catálogo de versiones, targets iOS/JVM,
   DataStore común, `PreferencesRepository`, test JVM, App mínima, shell iOS
   y documentación.
@@ -36,8 +37,14 @@
   `MotivosDenuncia`, `FuenteDenuncias` (estado PENDIENTE, fecha y descripción
   máxima de 500) y `DenunciaRepository` con validación y errores de dominio.
   9 pruebas nuevas.
+- **Fase 3 (acceso real):** `LoginScreen`, `RegistroScreen` y
+  `RecuperarPasswordScreen` conectados a `AutenticacionRepository`, con
+  validación, errores traducidos, carga y navegación. El arranque respeta la
+  sesión persistida; el cierre de sesión limpia ficha/negocio y conserva
+  ajustes del dispositivo. El registro exige términos y los guarda tras el
+  alta. 3 pruebas nuevas.
 - **Verificado en Windows:**
-  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (97/97 pruebas).
+  - `:composeApp:jvmTest` → BUILD SUCCESSFUL (100/100 pruebas).
   - `:composeApp:compileKotlinIosSimulatorArm64` → BUILD SUCCESSFUL.
   - `:composeApp:compileKotlinJvm` → BUILD SUCCESSFUL.
 - **Ajustes surgidos al compilar:**
@@ -70,7 +77,7 @@
 | 1A | Spike GitLive/Firebase, navegación, Coil, Koin, fechas, modelos | Completada (Windows) |
 | 1B | Primera build en iPhone | Bloqueada por Mac |
 | 2 | Núcleo: auth, repos, vinculación, reservas, Home, avisos, baja/cuenta, denuncias | En curso |
-| 3 | UI: tema, recursos, 21 rutas, pantallas | Pendiente |
+| 3 | UI: tema, recursos, 21 rutas, pantallas | En curso |
 | 4 | Push/APNs, fotos, privacy manifest, backend | Pendiente |
 | 5 | TestFlight y App Store | Pendiente |
 
@@ -83,7 +90,7 @@
 
 ## Siguiente paso
 
-1. Fase 2: dispositivos/FCM, fotos y términos se ubican en Fase 4/UI; revisar
-   si queda algún dato del núcleo antes de pasar a la Fase 3.
+1. Fase 3: elegir y portar la siguiente pantalla (elección/vinculación, Home
+   real o avisos/baja/cuenta); dispositivos/FCM y fotos quedan para la Fase 4.
 2. Validar en Mac el arranque de Firebase (`GoogleService-Info.plist`) y el
    runtime de navegación/Coil/lectura tipada/callables.

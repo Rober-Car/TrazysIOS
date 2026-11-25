@@ -1,25 +1,32 @@
 # ESTADO.md — Tablero de progreso
 
-Actualizado: 2026-11-24
+Actualizado: 2026-11-25
 
 ## Ahora
 
-- **Fase:** 2 en curso. Auth, vinculación (VÍA 1/VÍA 2), sesiones/reservas,
-  estado del Home, notificaciones, solicitud de baja, eliminación de cuenta y
-  denuncias UGC portados con fuentes inyectables y tests.
-- **Trabajando en:** nada (pendiente de revisión del entregable).
-- **Último commit:** `c25f740` (notificaciones/baja/cuenta) con push a `main`.
+- **Fase:** 3 en curso (UI). Núcleo de datos de la Fase 2 cerrado: auth,
+  vinculación, sesiones/reservas, Home, avisos, baja/cuenta y denuncias.
+- **Trabajando en:** flujo de acceso real ya portado; siguiente pantalla del
+  grafo pendiente de elegir (vinculación, Home real o cuenta).
+- **Último commit:** `b4f77ba` (denuncias UGC) con push a `main`.
 - **Remoto:** https://github.com/Rober-Car/TrazysIOS (`main`).
 
 ## Siguiente paso (en orden)
 
-1. Cerrar la Fase 2: dispositivos/FCM, fotos y términos dependen de Fase 4/UI;
-   decidir si queda algo más del núcleo antes de pasar a la Fase 3.
+1. Fase 3: continuar con elección/vinculación, Home real y pantallas de
+   avisos/baja/cuenta; dispositivos/FCM y fotos quedan para la Fase 4.
 2. Validar en Mac: `FirebaseApp.configure` + `GoogleService-Info.plist`, Coil
    con Skiko, navegación real y lectura tipada con los modelos portados.
 
 ## Hecho recientemente
 
+- 2026-11-25: **Fase 3 (acceso real):** `LoginScreen`, `RegistroScreen` y
+  `RecuperarPasswordScreen` contra `AutenticacionRepository`, con validación,
+  errores en español (`mensajeErrorAuth`), carga y navegación. El arranque
+  respeta la sesión de Firebase y el cierre de sesión limpia la ficha/negocio
+  (`PreferencesRepository.limpiarSesion`) conservando ajustes del dispositivo.
+  El registro exige aceptar términos y los guarda tras el alta. 3 pruebas
+  nuevas (100/100).
 - 2026-11-24: **Fase 2 (denuncias UGC):** `TiposContenidoDenunciable`,
   `MotivosDenuncia`, `FuenteDenuncias` (`denuncias`, estado PENDIENTE, fecha y
   descripción limitada a 500) y `DenunciaRepository` con validación de tipo,
@@ -80,10 +87,9 @@ Actualizado: 2026-11-24
 
 ## Verificación
 
+- 2026-11-25: `.\gradlew.bat :composeApp:jvmTest` → OK (100/100).
+- 2026-11-25: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
 - 2026-11-24: `.\gradlew.bat :composeApp:jvmTest` → OK (97/97).
-- 2026-11-24: `.\gradlew.bat :composeApp:compileKotlinIosSimulatorArm64` → OK.
-- 2026-11-24: `.\gradlew.bat :composeApp:compileKotlinJvm` → OK.
-- 2026-11-24: `.\gradlew.bat :composeApp:jvmTest` → OK (88/88).
 - 2026-11-23: `.\gradlew.bat :composeApp:jvmTest` → OK (65/65).
 - Nota: en Koin 4 `GlobalContext` no está en common; se usa un flag de arranque.
 
